@@ -42,17 +42,55 @@ Wazuh generated the alert **"Logon Failure - Unknown user or bad password"**.
 
 Repeated failed logons can indicate password guessing or brute-force activity. A single failure does not establish malicious activity.
 
+![Failed Logon](screenshots/Failed%20Logon.png)
+
 ### 2. Successful Logon Monitoring — Event ID 4624
 
 Confirmed that successful Windows logon events were visible in Wazuh.
 
 Monitoring successful authentication alongside failures can help analysts investigate authentication patterns and identify potentially suspicious activity.
 
+![Successful Logon](screenshots/Successful%20Logon.png)
+
 ### 3. Local User Account Creation — Event ID 4720
 
 Created a test local user account in the Windows lab and confirmed that the corresponding account-creation event was visible in Wazuh.
 
 Unexpected account creation can indicate unauthorized account provisioning or persistence, depending on the surrounding evidence.
+
+![Local User Account Created or Enabled](screenshots/Local%20User%20Account%20created%20or%20enabled.png)
+
+### 4. Local Group Membership Monitoring — Event ID 4732
+
+Windows Security Event ID 4732 records a member being added to a security-enabled local group. Monitoring this event can help identify unexpected privilege or group membership changes.
+
+During the lab, I explored local user and group configuration on the Windows 11 endpoint as part of testing IAM-related activity.
+
+**Security relevance:**
+- Identify unexpected additions to local security groups.
+- Investigate changes that could grant users additional permissions.
+- Review the account involved and the affected group to determine whether the change was authorized.
+
+**Evidence:**
+
+![Users Group Created](screenshots/Users%20Group%20Created.png)
+
+
+### 5. User Account Change Monitoring — Event ID 4738
+
+Windows Security Event ID 4738 records a user account being changed. Monitoring account modifications can help analysts investigate unexpected changes to account properties.
+
+This scenario extends the lab beyond authentication monitoring to include changes to existing user accounts.
+
+**Security relevance:**
+- Investigate unexpected modifications to user accounts.
+- Review event details to understand which account was changed.
+- Correlate account changes with other security events to determine whether the activity was authorized.
+
+**Evidence:**
+
+![User Account Changed](screenshots/User%20Account%20Changed.png)
+
 
 ## Investigation Approach
 
